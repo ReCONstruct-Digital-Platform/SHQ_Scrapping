@@ -4,14 +4,14 @@ from selenium.webdriver.common.by import By
 
 #write to csv file
 fields = ['Name','Link']
-#filename = "Individual_OSBL.csv"
-filename = "Individual_COOP.csv"
+filename = "Individual_OSBL.csv"
+#filename = "Individual_COOP.csv"
 
 driver = webdriver.Firefox()
 driver.get("http://www.habitation.gouv.qc.ca/repertoire.html")
 
 #by default, the webpage shows COOP, to select OSBL, then unquote the following code
-#driver.find_element(By.ID, "tx_shqrepertoire[typeorganisme][2]").click()
+driver.find_element(By.ID, "tx_shqrepertoire[typeorganisme][2]").click()
 
 #change the display item on one page to be 1000, then click search
 element_search = driver.find_element(By.NAME, "tx_shqrepertoire[search]")

@@ -6,12 +6,15 @@ import pandas as pd
 opts = webdriver.FirefoxOptions()
 opts.add_argument('--headless')
 
-df=pd.read_csv("Individual_COOP.csv")
+df=pd.read_csv("Individual_OSBL.csv")
 specific_column=df["Link"].tolist()
 
 n=1
 final_tmp = []
-for url in specific_column:
+for i in range(0,len(specific_column)):
+    print(i)
+    url = specific_column[i]
+    print(url)
     driver = webdriver.Firefox(options=opts)
     driver.get(url)
 
@@ -31,14 +34,13 @@ for url in specific_column:
     split_with_space_2_final_2 = split_with_space_2[5:][0].split(" ")[2:]
     flat_list_final_1.extend(split_with_space_2_final_2)
     final_tmp.append(flat_list_final_1)
-    n +=1
-    if n ==10:
-        break
+    driver.close()
+    driver.quit()
 
 #write to csv file
 fields = ['Adresse', 'Code postal', 'Téléphone', 'Téléphone sans frais', 'Télécopieur', 'Courriel', 'Site Internet', 'Total: PSL', 'Total: HLM', 'Total: Total']
 #filename = "Individual_OSBL.csv"
-filename = "new.csv"
+filename = "half_OSBL_file.csv"
 
 #write to csv file
 with open(filename, 'w', encoding='UTF-8',newline='') as csvfile:
